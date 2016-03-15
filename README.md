@@ -1,0 +1,1 @@
+Got musicnotationR plot (musicnot) showing with music controls in a shinyapp, although the controls don't work. Also it may be neccesary at the moment to add musicnot globally - and also dom and flies by running library(musicnotationR)
