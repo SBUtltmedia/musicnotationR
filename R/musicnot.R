@@ -51,13 +51,9 @@
 #' tba
 #' @export
 
-
-
-
 musicnot <- function(df, ranks=NULL, arrowsize=0.3, arrowweight=0.75, pointsize=3, ylabel=NULL,
                      colors = "default", gridcolors = NULL, gridlinesize=1,
                      labels = "rank", behav="default") {
-
   library(ggplot2)
   library(grid)
 
@@ -65,50 +61,47 @@ musicnot <- function(df, ranks=NULL, arrowsize=0.3, arrowweight=0.75, pointsize=
   df[,3] <- as.character(df[,3])
 
   colnames(df)[1] <- "time"
-
-
   myids <- sort(unique(c(df[,2], df[,3]))) #required for number of steps
 
-  if (is.null(ranks)==T){
-
+  if (is.null(ranks)==T) {
     df$mywinner <- match(df[,2], myids)
     df$myloser <- match(df[,3], myids)
-
   }
-
-  else
-
-    if (is.null(ranks)==F){
-      df$mywinner <- match(df[,2], ranks)
-      df$myloser <- match(df[,3], ranks)
-    }
-
+  else if (is.null(ranks)==F) {
+    df$mywinner <- match(df[,2], ranks)
+    df$myloser <- match(df[,3], ranks)
+  }
 
   ### defining colors
 
-  if (colors == "default") {mycolors <- gg_colors(length(myids)) }  #if colors are not defined default
-  else
-    if (colors == "terrain") {mycolors <- terrain.colors(length(myids)) }
-  else
-    if (colors == "heat") {mycolors <- heat.colors(length(myids)) }
-  else
-    if (colors == "cm") {mycolors <- rev(cm.colors(length(myids))) }
-  else
-    if (colors == "topo") {mycolors <- topo.colors(length(myids)) }
-  else
-    if (colors == "rainbow") {mycolors <- rainbow(length(myids)) }
-  else
-    if (colors == "random") {mycolors <- sample(colours(), length(myids))}
-  else
-    if (colors == "grays") {
+  if (colors == "default") {  #if colors are not defined default
+    mycolors <- gg_colors(length(myids))
+  }
+  else if (colors == "terrain") {
+    mycolors <- terrain.colors(length(myids))
+  }
+  else if (colors == "heat") {
+    mycolors <- heat.colors(length(myids))
+  }
+  else if (colors == "cm") {
+    mycolors <- rev(cm.colors(length(myids)))
+  }
+  else if (colors == "topo") {
+    mycolors <- topo.colors(length(myids))
+  }
+  else if (colors == "rainbow") {
+    mycolors <- rainbow(length(myids))
+  }
+  else if (colors == "random") {
+    mycolors <- sample(colours(), length(myids))
+  }
+  else if (colors == "grays") {
       mypal <- palette(gray(0:(length(myids)+1) / (length(myids)+1)))
       mycolors <- mypal[1:length(myids)]
-    }
-  else
+  }
+  else {
     mycolors <- colors
-
-
-
+  }
 
   ### defining grid colors
 
@@ -116,45 +109,39 @@ musicnot <- function(df, ranks=NULL, arrowsize=0.3, arrowweight=0.75, pointsize=
     mygridcolors <- "grey90"
   }
 
-  else
+  else {
     mygridcolors <- mycolors
-
+  }
 
   ### defining y-axis tick labels
 
-  if (labels=="rank") {  mylabels <- 1:length(myids) }
-
-  else
-
-  if (labels=="name") {
-
-    if(is.null(ranks)==T){mylabels <- myids }
-
-    else
-      mylabels <- ranks
+  if (labels=="rank") { 
+    mylabels <- 1:length(myids)
   }
-
+  else if (labels=="name") {
+    if(is.null(ranks)==T){
+      mylabels <- myids
+    }
+    else {
+      mylabels <- ranks
+    }
+  }
 
   ### define linetypes
 
-  if (behav=="default") {  mylinetype <- 1 }
-
-  else
-
-    if (behav=="yes") {  mylinetype <- match((df[,4]), unique(df[,4]))  }
-
-  else
-
-    mylinetype <-   match((df[,4]), behav)
-
-
-
-
+  if (behav=="default") {
+    mylinetype <- 1
+  }
+  else if (behav=="yes") { 
+    mylinetype <- match((df[,4]), unique(df[,4]))
+  }
+  else {
+    mylinetype <- match((df[,4]), behav)
+  }
 
   ### plotting
 
   myplot <-
-
     ggplot() +
     geom_segment(aes
                  (x = time,
@@ -164,10 +151,8 @@ musicnot <- function(df, ranks=NULL, arrowsize=0.3, arrowweight=0.75, pointsize=
                   color=factor(mywinner)
                  ),
                  linetype=mylinetype,
-
                  arrow=arrow(length = unit(arrowsize, "cm")),
                  lwd=arrowweight,
-
                  data=df)  +
 
     geom_point(aes
@@ -178,23 +163,13 @@ musicnot <- function(df, ranks=NULL, arrowsize=0.3, arrowweight=0.75, pointsize=
                size=pointsize,
                data=df)  +
 
-
     coord_cartesian(ylim=c(0.5,length(myids)+0.5)) +
-
     scale_y_reverse(breaks=1:length(myids), labels=mylabels)  +
-
     theme_bw() +
-
     theme(legend.position = "none") +
-
     ylab(ylabel) +
-
     scale_color_manual(values = mycolors, limits=c(1:length(myids))) +
-
     theme(panel.grid.major.y = element_line(color = mygridcolors, size=gridlinesize))
 
-
-
   return(myplot)
-
 }
