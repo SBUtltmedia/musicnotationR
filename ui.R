@@ -3,17 +3,12 @@ library(ggplot2)
 library(grid)
 library(dplyr)
 
-max_time <- 5804
-
 shinyUI(fluidPage(
   headerPanel("Time Ordered Network of Social Interactions"),
-  
   plotOutput("distPlot"),
-  
   hr(),
   br(),
   br(),
-  
   
   fluidRow(
     column(5,
@@ -32,27 +27,17 @@ shinyUI(fluidPage(
                                        "Losers only" = 3), 
                         selected = 2,
                         inline=T),
-           
-           
-           
+
            radioButtons("graphtype", "Graph Type",
                         choices = list("All individuals" = 1, 
                                        "Only selected (min 2 indivs need to be checked)" = 2), 
                         selected = 1,
                         inline=T)
-           
-           
     ),
-    
     
     column(4,
-           
-           sliderInput("timeper", label = h3("Time Period"), 1, max_time, value = c(1,max_time), step=max_time / 100, ticks=T)
-           
-           
-           
+           uiOutput("timeper")
     ),
-    
     
     column(3,
            radioButtons("linewt", label = h3("Line & Arrow Weight"),
@@ -64,9 +49,6 @@ shinyUI(fluidPage(
                         choices = list("Colors" = 1, "Gray" = 2), 
                         selected = 2,
                         inline=T)
-           
-           
-           
     )
   ),
   
@@ -89,7 +71,4 @@ shinyUI(fluidPage(
                a(href ="https://github.com/jalapic/shinyapps", "my GitHub page",target = "_blank")
     ))
   ) 
-  
-  
-  
 ))
