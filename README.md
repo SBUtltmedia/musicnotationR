@@ -4,4 +4,4 @@
 2. Run `install.packages("rbundler")` in the RStudio console
 3. Run `library(rbundler)`
 4. Run `bundle('.')`
-5. Run `runApp()`
+5. Make sure server.R is open and press the “Run App” button

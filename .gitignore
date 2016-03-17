@@ -16,6 +16,9 @@
 # RStudio files
 .Rproj.user/
 
+.Rbundle/
+.Renviron
+
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
