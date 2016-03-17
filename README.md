@@ -1,1 +1,7 @@
-Got musicnotationR plot (musicnot) showing with music controls in a shinyapp, although the controls don't work. Also it may be neccesary at the moment to add musicnot globally - and also dom and flies by running library(musicnotationR)
+## Setup
+
+1. Open the musicnotationR.Rproj in [RStudio Desktop](https://www.rstudio.com/products/RStudio/#Desktop)
+2. Run `install.packages("rbundler")` in the RStudio console
+3. Run `library(rbundler)`
+4. Run `bundle('.')`
+5. Run `runApp()`
