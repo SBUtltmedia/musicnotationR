@@ -13,13 +13,7 @@ shinyUI(fluidPage(
   fluidRow(
     column(5,
            
-           checkboxGroupInput("checkGroup", label = h3("Ranks to Include"), 
-                              choices = list("1" = 1, "2" = 2, "3" = 3, 
-                                             "4" = 4, "5" = 5, "6" = 6, 
-                                             "7" = 7, "8" = 8, "9" = 9, 
-                                             "10" = 10, "11" = 11),
-                              selected = c(3),
-                              inline = T),
+           uiOutput("checkGroup"),
            
            radioButtons("winloser", "Who to include",
                         choices = list("Winners only" = 1, 
