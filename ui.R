@@ -3,6 +3,8 @@ library(ggplot2)
 library(grid)
 library(dplyr)
 
+max_time <- 5804
+
 shinyUI(fluidPage(
   headerPanel("Time Ordered Network of Social Interactions"),
   
@@ -45,7 +47,7 @@ shinyUI(fluidPage(
     
     column(4,
            
-           sliderInput("timeper", label = h3("Time Period"), 1, 999, value = c(1,999), step=10, ticks=T)
+           sliderInput("timeper", label = h3("Time Period"), 1, max_time, value = c(1,max_time), step=max_time / 100, ticks=T)
            
            
            

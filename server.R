@@ -9,7 +9,7 @@ library(shiny)
 source('R/musicnot.R')
 
 shinyServer(function(input, output) {
-  newdf <- read.csv("data-raw/ken.csv", stringsAsFactors=F)
+  newdf <- read.csv("data-raw/reformat.csv", stringsAsFactors=F)
   df1 <- reactive({
     mintime <- input$timeper[1]
     maxtime <- input$timeper[2]
