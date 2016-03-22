@@ -8,7 +8,7 @@
 
 ## Running locally
 
-1. Make sure the server.R file is open and press the “Run App” button
+1. Run `shiny::runApp()` or press the “Run App” button (with `server.R` open)
 
 
 ## Publishing

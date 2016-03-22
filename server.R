@@ -48,9 +48,10 @@ shinyServer(function(input, output) {
   output$timeper <- renderUI({
     sliderInput("timeper", label = h3("Time Period"), 1, max_time, value = c(1,max_time), step=max_time / 100, ticks=T)
   })
+
   output$checkGroup <- renderUI({
     checkboxGroupInput("checkGroup", label = h3("Ranks to Include"), 
-         choices = list(1, 2, 3, 4),
+         choices = sort(unique(c(newdf$winner, newdf$loser))),
          selected = c(1),
          inline = T)
   })
