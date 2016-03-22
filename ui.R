@@ -11,10 +11,9 @@ shinyUI(fluidPage(
   br(),
   
   fluidRow(
-    column(5,
-           
+    column(7,
            uiOutput("checkGroup"),
-           
+      
            radioButtons("winloser", "Who to include",
                         choices = list("Winners only" = 1, 
                                        "Winners & Losers" = 2,
@@ -28,21 +27,8 @@ shinyUI(fluidPage(
                         selected = 1,
                         inline=T)
     ),
-    
-    column(4,
+    column(5,
            uiOutput("timeper")
-    ),
-    
-    column(3,
-           radioButtons("linewt", label = h3("Line & Arrow Weight"),
-                        choices = list("Heavy" = 1, "Light" = 2), 
-                        selected = 1,
-                        inline=T),
-           
-           radioButtons("horizline", label = h3("Grid Line Color"),
-                        choices = list("Colors" = 1, "Gray" = 2), 
-                        selected = 2,
-                        inline=T)
     )
   ),
   
