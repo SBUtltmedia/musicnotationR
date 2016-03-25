@@ -12,7 +12,8 @@ shinyUI(fluidPage(
   
   fluidRow(
     column(7,
-           uiOutput("checkGroup"),
+           uiOutput("playerGroup"),
+           uiOutput("behaviorGroup"),
       
            radioButtons("winloser", "Who to include",
                         choices = list("Winners only" = 1, 

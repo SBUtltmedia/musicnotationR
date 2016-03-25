@@ -13,32 +13,33 @@ shinyServer(function(input, output) {
   df1 <- reactive({
     mintime <- input$timeper[1]
     maxtime <- input$timeper[2]
-    df1 <- newdf %>% filter(Time >= mintime & Time <= maxtime)
-    ranks <- input$checkGroup
+    players <- input$playerGroup
+    behaviors <- input$behaviorGroup
+    df1 <- newdf %>% filter(Time >= mintime & Time <= maxtime & behavior %in% behaviors)
     if (input$graphtype == 1) {
       if (input$winloser == 1) {
-        df1 <- df1[((df1$winner %in% ranks) == T),]
+        df1 <- df1[((df1$winner %in% players) == T),]
       }
       else if (input$winloser == 2) {
-        df1 <- df1[((df1$winner %in% ranks) == T | (df1$loser %in% ranks) == T),]
+        df1 <- df1[((df1$winner %in% players) == T | (df1$loser %in% players) == T),]
       }
       else {
-        df1 <- df1[((df1$loser %in% ranks) == T),]
+        df1 <- df1[((df1$loser %in% players) == T),]
       }
     }
     else {
       if (input$winloser == 1) {
-        df1 <- df1[(df1$winner %in% ranks ==T) & (df1$loser %in% ranks ==T),]    
-        df1 <- df1[((df1$winner %in% ranks) == T),]
+        df1 <- df1[(df1$winner %in% players ==T) & (df1$loser %in% players ==T),]    
+        df1 <- df1[((df1$winner %in% players) == T),]
       }
       else if (input$winloser == 2) {
-        df1 <- df1[(df1$winner %in% ranks ==T) & (df1$loser %in% ranks ==T),]    
-        df1 <- df1[((df1$winner %in% ranks) == T | (df1$loser %in% ranks) == T),]
+        df1 <- df1[(df1$winner %in% players ==T) & (df1$loser %in% players ==T),]    
+        df1 <- df1[((df1$winner %in% players) == T | (df1$loser %in% players) == T),]
       }
       else {
-        df1 <- df1[(df1$winner %in% ranks ==T) & (df1$loser %in% ranks ==T),]    
+        df1 <- df1[(df1$winner %in% players ==T) & (df1$loser %in% players ==T),]    
       }
-      df1 <- df1[((df1$loser %in% ranks) == T),]
+      df1 <- df1[((df1$loser %in% players) == T),]
     }    
   })
   
@@ -49,10 +50,20 @@ shinyServer(function(input, output) {
     sliderInput("timeper", label = h3("Time Period"), 1, max_time, value = c(1,max_time), step=max_time / 100, ticks=T)
   })
 
-  output$checkGroup <- renderUI({
-    checkboxGroupInput("checkGroup", label = h3("Ranks to Include"), 
-         choices = sort(unique(c(newdf$winner, newdf$loser))),
-         selected = c(1),
+  playerChoices <- sort(unique(c(newdf$winner, newdf$loser)))
+  behevaiorChoices <- sort(unique(newdf$behavior))
+  
+  output$playerGroup <- renderUI({
+    checkboxGroupInput("playerGroup", label = h3("Players to Include"), 
+         choices = playerChoices,
+         selected = playerChoices,
          inline = T)
+  })
+  
+  output$behaviorGroup <- renderUI({
+    checkboxGroupInput("behaviorGroup", label = h3("Behaviors to Include"), 
+                       choices = behevaiorChoices,
+                       selected = behevaiorChoices,
+                       inline = T)
   })
 })
