@@ -13,7 +13,8 @@ LazyData: true
 Imports:
     dplyr,
     grid,
-    ggplot2
+    ggplot2,
+    shiny
 Suggests:
     knitr,
     testthat
