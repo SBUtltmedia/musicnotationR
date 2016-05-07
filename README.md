@@ -13,6 +13,5 @@
 
 ## Publishing
 
-1. Run `install.packages('BH')`
-2. Do the same for 'crayon', 'evaluate', 'formatR', 'highr', 'knitr, 'markdown', 'praise', 'testthat'
-3. Press the "Publish" button just to the right of the "Run App" button
+1. Run `install.packages(c('BH', 'crayon', 'evaluate', 'formatR', 'highr', 'knitr', 'markdown', 'praise', 'testthat'))`
+2. Press the "Publish" button just to the right of the "Run App" button
